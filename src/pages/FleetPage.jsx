@@ -99,7 +99,7 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
       <section className="fleet-catalog-section">
         <div className="fleet-cards-grid">
           {filteredFleet.map((car) => (
-            <div key={car.id} className="fleet-card">
+            <div key={car.id} className="fleet-card fleet-page-card">
               <div className="card-image-wrapper">
                 <Link to={`/fleet/${car.id}`}>
                   <img src={car.image} alt={car.name} className="car-preview-img" loading="lazy" />
