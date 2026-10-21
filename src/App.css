@@ -393,6 +393,26 @@
   gap: 24px;
 }
 
+.fleet-empty-state {
+  grid-column: 1 / -1;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.fleet-empty-state h2 {
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.fleet-empty-state p {
+  margin-top: 8px;
+}
+
 .fleet-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);

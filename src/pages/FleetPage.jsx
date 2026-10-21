@@ -6,16 +6,12 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
   const [filterCategory, setFilterCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
   const [minRange, setMinRange] = useState(250);
+  const categories = ["Compact/Economy", "Midsize/SUV", "7-seater/Van", "Premium"];
 
-  const filteredFleet = fleetData
-    .filter((car) => {
-      const numericRange = parseInt(car.range);
-      if (numericRange < minRange) return false;
-      if (filterCategory === 'suv') return car.id === 'model-y';
-      if (filterCategory === 'fast-charge') return car.id === 'ioniq-5';
-      if (filterCategory === 'performance') return car.id === 'polestar-2';
-      return true;
-    })
+  const rangeFilteredFleet = fleetData.filter((car) => parseInt(car.range) >= minRange);
+
+  const filteredFleet = rangeFilteredFleet
+    .filter((car) => filterCategory === 'all' || car.categories.includes(filterCategory))
     .sort((a, b) => {
       if (sortBy === 'price-low') return a.price - b.price;
       if (sortBy === 'price-high') return b.price - a.price;
@@ -42,26 +38,17 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
               className={`filter-chip ${filterCategory === 'all' ? 'chip-active' : ''}`}
               onClick={() => setFilterCategory('all')}
             >
-              All Models ({fleetData.length})
+              All Models ({rangeFilteredFleet.length})
             </button>
-            <button
-              className={`filter-chip ${filterCategory === 'suv' ? 'chip-active' : ''}`}
-              onClick={() => setFilterCategory('suv')}
-            >
-              🚙 Electric Crossover
-            </button>
-            <button
-              className={`filter-chip ${filterCategory === 'fast-charge' ? 'chip-active' : ''}`}
-              onClick={() => setFilterCategory('fast-charge')}
-            >
-              ⚡ 800V Ultra-Fast
-            </button>
-            <button
-              className={`filter-chip ${filterCategory === 'performance' ? 'chip-active' : ''}`}
-              onClick={() => setFilterCategory('performance')}
-            >
-              🏎️ AWD Performance
-            </button>
+            {categories.map((category) => (
+              <button
+                key={category}
+                className={`filter-chip ${filterCategory === category ? 'chip-active' : ''}`}
+                onClick={() => setFilterCategory(category)}
+              >
+                {category} ({rangeFilteredFleet.filter((car) => car.categories.includes(category)).length})
+              </button>
+            ))}
           </div>
 
           <div className="sort-controls">
@@ -98,7 +85,12 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
       {/* Fleet Catalog Grid */}
       <section className="fleet-catalog-section">
         <div className="fleet-cards-grid">
-          {filteredFleet.map((car) => (
+          {filteredFleet.length === 0 ? (
+            <div className="fleet-empty-state" role="status">
+              <h2>No vehicles match these filters</h2>
+              <p>Lower the minimum range or choose another category.</p>
+            </div>
+          ) : filteredFleet.map((car) => (
             <div key={car.id} className="fleet-card fleet-page-card">
               <div className="card-image-wrapper">
                 <Link to={`/fleet/${car.id}`}>
