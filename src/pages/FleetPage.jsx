@@ -6,6 +6,7 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
   const [filterCategory, setFilterCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
   const [minRange, setMinRange] = useState(250);
+  const [showAll, setShowAll] = useState(false);
   const categories = ["Compact/Economy", "Midsize/SUV", "7-seater/Van", "Premium"];
 
   const rangeFilteredFleet = fleetData.filter((car) => parseInt(car.range) >= minRange);
@@ -18,6 +19,7 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
       if (sortBy === 'range') return parseInt(b.range) - parseInt(a.range);
       return 0;
     });
+  const visibleFleet = showAll ? filteredFleet : filteredFleet.slice(0, 4);
 
   return (
     <div className="page-container">
@@ -90,7 +92,7 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
               <h2>No vehicles match these filters</h2>
               <p>Lower the minimum range or choose another category.</p>
             </div>
-          ) : filteredFleet.map((car) => (
+          ) : visibleFleet.map((car) => (
             <div key={car.id} className="fleet-card fleet-page-card">
               <div className="card-image-wrapper">
                 <Link to={`/fleet/${car.id}`}>
@@ -159,6 +161,11 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
             </div>
           ))}
         </div>
+        {!showAll && filteredFleet.length > 4 && (
+          <button className="fleet-show-all-button" onClick={() => setShowAll(true)}>
+            Show All
+          </button>
+        )}
       </section>
     </div>
   );

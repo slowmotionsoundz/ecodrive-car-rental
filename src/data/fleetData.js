@@ -193,6 +193,66 @@ export const fleetData = [
       'Dual panoramic digital displays',
       'Remote Smart Parking Assist (where equipped)'
     ]
+  },
+  {
+    id: 'volvo-ex90',
+    name: 'Volvo EX90 Twin Motor AWD',
+    category: '100% Pure EV',
+    categories: ['7-seater/Van', 'Midsize/SUV', 'Premium'],
+    range: '300 mi',
+    topSpeed: '112 mph',
+    battery: '100%',
+    price: 95,
+    badgeColor: '#E4E8F0',
+    image: '/cars/placeholder.jpg',
+    acceleration: '5.7s 0-60',
+    seats: '7 Adults',
+    drive: 'Dual Motor AWD',
+    chargingSpeed: '250 kW (10-80% in ~30 min)',
+    batteryCapacity: '107 kWh',
+    luggage: '85.7 cu ft cargo',
+    autopilot: 'Pilot Assist',
+    description:
+      'A luxurious all-electric three-row SUV combining Scandinavian design, advanced safety technology, a serene cabin, and comfortable seating for families and long-distance journeys.',
+    features: [
+      'Three-row seating for up to 7 passengers',
+      'Advanced driver assistance and collision avoidance',
+      'Google built-in infotainment',
+      'Panoramic electrochromic glass roof',
+      'Premium Bowers & Wilkins audio (where equipped)',
+      'Over-the-air software updates',
+      '360-degree camera system'
+    ]
+  },
+  {
+    id: 'renault-megane-e-tech',
+    name: 'Renault Megane E-Tech Electric Long Range',
+    category: '100% Pure EV',
+    categories: ['Compact/Economy', 'Premium'],
+    range: '285 mi',
+    topSpeed: '99 mph',
+    battery: '100%',
+    price: 42,
+    badgeColor: '#F9E4D4',
+    image: '/cars/placeholder.jpg',
+    acceleration: '7.4s 0-60',
+    seats: '5 Adults',
+    drive: 'Front-Wheel Drive',
+    chargingSpeed: '130 kW (15-80% in ~32 min)',
+    batteryCapacity: '60 kWh',
+    luggage: '44.8 cu ft cargo',
+    autopilot: 'Active Driver Assist',
+    description:
+      'A compact European electric hatchback offering efficient everyday driving, distinctive French styling, Google-powered technology, and a maneuverable footprint ideal for city streets and commuting.',
+    features: [
+      'Google built-in with Google Maps',
+      'OpenR dual-screen infotainment system',
+      'Regenerative braking with adjustable levels',
+      'Adaptive cruise control (where equipped)',
+      'Wireless smartphone integration',
+      'LED lighting signature',
+      'Multiple driving modes'
+    ]
   }
 ];
 
