@@ -577,6 +577,16 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.card-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-arrow {
+  display: none;
+}
+
 .fleet-page-card .card-action-bar {
   margin-top: 0;
   gap: 12px;
@@ -2063,5 +2073,56 @@
   .cta-banner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* Mobile stacked card action bar */
+  .card-action-bar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "price details"
+      "reserve reserve";
+    row-gap: 10px;
+    padding-top: 14px;
+  }
+
+  .price-container {
+    grid-area: price;
+    align-self: center;
+  }
+
+  .card-action-buttons {
+    display: contents;
+  }
+
+  .btn-details-link {
+    grid-area: details;
+    justify-self: end;
+    align-self: center;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    padding: 4px 6px;
+    font-size: 0.82rem;
+  }
+
+  .btn-details-link:hover {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+  }
+
+  .details-arrow {
+    display: inline;
+    margin-left: 3px;
+  }
+
+  .btn-reserve {
+    grid-area: reserve;
+    width: 100%;
+    text-align: center;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    border-radius: var(--radius-md);
   }
 }

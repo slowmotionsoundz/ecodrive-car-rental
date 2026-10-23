@@ -181,9 +181,10 @@ export default function HomePage({
                       <span className="currency-val">${car.price}</span>
                       <span className="period-label">/ day</span>
                     </div>
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className="card-action-buttons">
                       <Link to={`/fleet/${car.id}`} className="btn-details-link">
-                        Details
+                        <span>Details</span>
+                        <span className="details-arrow">→</span>
                       </Link>
                       <button
                         className={`btn-reserve ${activeRentalCar === car.name ? 'btn-selected' : ''}`}
