@@ -989,7 +989,9 @@
 
   .catalog-header-bar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
   }
 }
 
