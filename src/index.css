@@ -67,3 +67,10 @@ button, input, select {
                 opacity: 1;
             }
         }
+      
+@media (max-width:320px)   {
+  .fleet-card{
+    aspect-ratio: 0.5/1;
+    
+  } 
+}
