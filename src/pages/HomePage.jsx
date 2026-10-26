@@ -54,6 +54,39 @@ export default function HomePage({
     navigate('/fleet');
   };
 
+  // Format date helper for human-friendly luxury display
+  const formatDisplayDate = (isoStr) => {
+    if (!isoStr) return { date: 'Select Date', time: '' };
+    try {
+      const d = new Date(isoStr);
+      const date = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      const time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      return { date, time };
+    } catch {
+      return { date: isoStr, time: '' };
+    }
+  };
+
+  const getDurationText = () => {
+    try {
+      const diff = new Date(returnDate) - new Date(pickupDate);
+      const days = Math.round(diff / (1000 * 60 * 60 * 24));
+      return days > 0 ? `⚡ ${days}-Day Green Rental` : '⚡ Same-Day Rental';
+    } catch {
+      return '⚡ Green EV Rental';
+    }
+  };
+
+  const getHubSubtitle = (hub) => {
+    if (hub.includes('SFO')) return 'San Francisco, CA';
+    if (hub.includes('Downtown')) return 'California St, SF';
+    if (hub.includes('San Jose')) return 'San Jose, CA';
+    return 'California Hub';
+  };
+
+  const pickupInfo = formatDisplayDate(pickupDate);
+  const returnInfo = formatDisplayDate(returnDate);
+
   return (
     <div>
       {/* 2. Hero & Quick Pickup Search */}
@@ -68,47 +101,86 @@ export default function HomePage({
             Instant mobile booking, guaranteed zero-emission models, and contactless digital key pickup.
           </p>
 
-          <div className="search-bar-container">
-            <div className="search-field">
-              <label className="field-label">📍 Pickup & Return Hub</label>
+          <div className="luxury-search-capsule">
+            {/* Hub Segment */}
+            <div className="search-segment search-segment-hub">
+              <div className="segment-label">Pickup & Return Hub</div>
+              <div className="segment-content">
+                <span className="segment-icon">📍</span>
+                <div className="segment-text-wrap">
+                  <div className="segment-main-val">{selectedHub}</div>
+                  <div className="segment-sub-val">{getHubSubtitle(selectedHub)}</div>
+                </div>
+                <span className="segment-change-hint">Change ▾</span>
+              </div>
               <select
-                className="search-select"
+                className="hidden-interactive-control"
                 value={selectedHub}
                 onChange={(e) => setSelectedHub(e.target.value)}
+                aria-label="Select pickup and return hub"
               >
-                <option value="SFO Airport Hub">📍 San Francisco Airport (SFO)</option>
-                <option value="Downtown Hub">📍 Downtown SF Hub (California St)</option>
-                <option value="San Jose Hub">📍 San Jose Airport (SJC)</option>
+                <option value="SFO Airport Hub">San Francisco Airport (SFO)</option>
+                <option value="Downtown Hub">Downtown SF Hub (California St)</option>
+                <option value="San Jose Hub">San Jose Airport (SJC)</option>
               </select>
             </div>
 
-            <div className="search-field">
-              <label className="field-label">📅 Pick-up Schedule</label>
+            <div className="segment-divider"></div>
+
+            {/* Pickup Date Segment */}
+            <div className="search-segment search-segment-date">
+              <div className="segment-label">Pick-Up Date</div>
+              <div className="segment-content">
+                <div className="segment-text-wrap">
+                  <div className="segment-main-val">{pickupInfo.date}</div>
+                  <div className="segment-sub-val text-emerald">{pickupInfo.time}</div>
+                </div>
+              </div>
               <input
                 type="datetime-local"
-                className="search-input"
+                className="hidden-interactive-control"
                 value={pickupDate}
                 onChange={(e) => setPickupDate(e.target.value)}
+                aria-label="Select pickup date and time"
               />
             </div>
 
-            <div className="search-field">
-              <label className="field-label">🏁 Return Schedule</label>
+            <div className="segment-divider"></div>
+
+            {/* Return Date Segment */}
+            <div className="search-segment search-segment-date">
+              <div className="segment-label">Return Date</div>
+              <div className="segment-content">
+                <div className="segment-text-wrap">
+                  <div className="segment-main-val">{returnInfo.date}</div>
+                  <div className="segment-sub-val text-emerald">{returnInfo.time}</div>
+                </div>
+              </div>
               <input
                 type="datetime-local"
-                className="search-input"
+                className="hidden-interactive-control"
                 value={returnDate}
                 onChange={(e) => setReturnDate(e.target.value)}
+                aria-label="Select return date and time"
               />
             </div>
 
-            <button
-              className="btn-search-vehicles"
-              onClick={handleSearchSubmit}
-            >
-              <span>Find EV</span>
-              <span className="btn-icon">⚡</span>
-            </button>
+            <div className="segment-divider"></div>
+
+            {/* Action Segment */}
+            <div className="search-segment-action">
+              <div className="trip-duration-badge">
+                <span className="duration-label">Duration</span>
+                <span className="duration-pill">{getDurationText()}</span>
+              </div>
+              <button
+                className="btn-search-vehicles"
+                onClick={handleSearchSubmit}
+              >
+                <span>Find EV</span>
+                <span className="btn-icon">⚡</span>
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -181,9 +253,10 @@ export default function HomePage({
                       <span className="currency-val">${car.price}</span>
                       <span className="period-label">/ day</span>
                     </div>
-                    <div style={{ display: 'flex', gap: '8px' }}>
+                    <div className="card-action-buttons">
                       <Link to={`/fleet/${car.id}`} className="btn-details-link">
-                        Details
+                        <span>Details</span>
+                        <span className="details-arrow">→</span>
                       </Link>
                       <button
                         className={`btn-reserve ${activeRentalCar === car.name ? 'btn-selected' : ''}`}

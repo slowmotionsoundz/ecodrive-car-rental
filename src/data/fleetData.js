@@ -27,6 +27,33 @@ export const fleetData = [
     ]
   },
   {
+    id: 'tesla-roadster',
+    name: 'Tesla Roadster (Next-Gen)',
+    category: 'Hypercar • SpaceX Spec',
+    categories: ['Sports/Performance', 'Premium'],
+    range: '620 mi',
+    topSpeed: '250+ mph',
+    battery: '100%',
+    price: 289,
+    badgeColor: '#FEE2E2',
+    image: '/cars/tesla-roadster.jpg',
+    acceleration: '< 1.9s 0-60',
+    seats: '4 Adults',
+    drive: 'Tri-Motor AWD',
+    chargingSpeed: '350 kW V4 Supercharge',
+    batteryCapacity: '200 kWh',
+    luggage: 'Removable Glass Roof',
+    autopilot: 'Full Self-Driving Included',
+    description: 'The quickest accelerating production car ever built. Features a 200 kWh structural battery pack for over 600 miles of range, tri-motor all-wheel drive with torque vectoring, and a removable lightweight glass roof.',
+    features: [
+      'Sub-1.9s 0-60 mph with torque vectoring',
+      '620 miles single-charge EPA estimated range',
+      'Removable lightweight glass targa roof',
+      'Complimentary V4 Supercharging access',
+      'Full Self-Driving (Supervised) included'
+    ]
+  },
+  {
     id: 'ioniq-5',
     name: 'Hyundai Ioniq 5',
     category: 'Pure EV • 800V Ultra-Fast',
