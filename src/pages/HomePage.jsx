@@ -108,7 +108,7 @@ export default function HomePage({
               <div className="segment-content">
                 <span className="segment-icon">📍</span>
                 <div className="segment-text-wrap">
-                  <div className="segment-main-val">{selectedHub}</div>
+                  <div className="segment-main-val">{selectedHub.replace(' Hub', '')}</div>
                   <div className="segment-sub-val">{getHubSubtitle(selectedHub)}</div>
                 </div>
                 <span className="segment-change-hint">Change ▾</span>
