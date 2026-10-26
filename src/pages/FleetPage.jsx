@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fleetData } from '../data/fleetData';
+import { fleetData, categories } from '../data/fleetData';
 
 export default function FleetPage({ onReserveCar, activeRentalCar }) {
   const [filterCategory, setFilterCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
-  const [minRange, setMinRange] = useState(250);
   const [showAll, setShowAll] = useState(false);
-  const categories = ["Compact/Economy", "Midsize/SUV", "7-seater/Van", "Premium"];
+
+  const fleetRanges = fleetData.map((car) => parseInt(car.range));
+  const minAvailableRange = Math.floor(Math.min(...fleetRanges) / 10) * 10;
+  const maxAvailableRange = Math.ceil(Math.max(...fleetRanges) / 10) * 10;
+  const [minRange, setMinRange] = useState(minAvailableRange);
 
   const rangeFilteredFleet = fleetData.filter((car) => parseInt(car.range) >= minRange);
 
@@ -58,8 +61,8 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
               <label>Min Range: <strong>{minRange} mi</strong></label>
               <input
                 type="range"
-                min="250"
-                max="330"
+                min={minAvailableRange}
+                max={maxAvailableRange}
                 step="10"
                 value={minRange}
                 onChange={(e) => setMinRange(Number(e.target.value))}
