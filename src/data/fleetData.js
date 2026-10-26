@@ -283,6 +283,8 @@ export const fleetData = [
   }
 ];
 
+export const categories = ['Compact/Economy', 'Midsize/SUV', '7-seater/Van', 'Premium'];
+
 export const hubsData = [
   { id: 'sfo', name: 'SFO Airport Hub', label: '📍 San Francisco Airport (SFO)', chargers: '16x 250kW Superchargers' },
   { id: 'downtown', name: 'Downtown Hub', label: '📍 Downtown SF Hub (California St)', chargers: '8x 150kW Level 3 Hub' },
