@@ -266,10 +266,15 @@
 .search-segment {
   position: relative;
   flex: 1;
+  min-width: 0;
   padding: 8px 16px;
   border-radius: 14px;
   transition: all 0.2s ease;
   cursor: pointer;
+}
+
+.search-segment-hub {
+  flex: 1.7;
 }
 
 .search-segment:hover {
@@ -283,21 +288,24 @@
   letter-spacing: 0.6px;
   color: #94a3b8;
   margin-bottom: 3px;
+  white-space: nowrap;
 }
 
 .segment-content {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .segment-icon {
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 .segment-text-wrap {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .segment-main-val {
@@ -305,6 +313,7 @@
   font-weight: 700;
   color: #ffffff;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .segment-sub-val {
@@ -312,6 +321,7 @@
   color: #94a3b8;
   font-weight: 500;
   margin-top: 1px;
+  white-space: nowrap;
 }
 
 .segment-sub-val.text-emerald {
@@ -321,9 +331,12 @@
 
 .segment-change-hint {
   margin-left: auto;
+  padding-left: 8px;
   font-size: 0.72rem;
   font-weight: 600;
   color: #34d399;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .segment-divider {
@@ -336,8 +349,9 @@
 .search-segment-action {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding-left: 12px;
+  gap: 14px;
+  padding: 0 4px 0 16px;
+  flex: 0 0 auto;
 }
 
 .trip-duration-badge {
