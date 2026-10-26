@@ -1997,7 +1997,7 @@
 }
 
 .vehicle-lock-pill {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 700;
   background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -2005,81 +2005,191 @@
   border-radius: var(--radius-full);
 }
 
-.digital-keyfob-box {
-  background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.9) 100%);
-  border: 1px solid rgba(52, 211, 153, 0.35);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  text-align: center;
-}
-
-.keyfob-icon {
-  font-size: 3rem;
-  display: inline-block;
-  margin-bottom: 10px;
-}
-
-.keyfob-inner h3 {
-  font-size: 1.35rem;
-  color: #ffffff;
-  margin-bottom: 6px;
-}
-
-.keyfob-inner p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  max-width: 480px;
-  margin: 0 auto 22px;
-}
-
-.keyfob-controls {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-.btn-keyfob {
-  background: rgba(16, 185, 129, 0.2);
+.pill-locked {
   color: #34d399;
-  border: 1px solid rgba(52, 211, 153, 0.4);
-  padding: 12px 24px;
-  border-radius: var(--radius-md);
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease;
+  border-color: rgba(52, 211, 153, 0.3);
 }
 
-.btn-keyfob:hover {
-  background: var(--primary-emerald);
-  color: #ffffff;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
-}
-
-.btn-keyfob.keyfob-active {
-  background: rgba(239, 68, 68, 0.2);
+.pill-unlocked {
   color: #f87171;
-  border-color: rgba(239, 68, 68, 0.4);
+  border-color: rgba(248, 113, 113, 0.3);
 }
 
-.btn-keyfob-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 20px;
+/* Battery Glance Bar */
+.battery-glance-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: var(--radius-md);
-  font-size: 0.95rem;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.battery-glance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.battery-label {
+  color: var(--text-muted);
   font-weight: 600;
+}
+
+.battery-val {
+  font-weight: 700;
+}
+
+.battery-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.battery-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  border-radius: var(--radius-full);
+  transition: width 0.4s ease;
+}
+
+/* Digital Key Remote Controls */
+.digital-key-remote-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.remote-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+}
+
+.remote-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.btn-remote-action {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
+  color: #f3f4f6;
 }
 
-.btn-keyfob-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
+.btn-remote-action:hover {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: rgba(52, 211, 153, 0.4);
 }
 
-.btn-keyfob-secondary.climate-active {
+.remote-action-icon {
+  font-size: 1.4rem;
+}
+
+.remote-action-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.remote-action-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.btn-remote-action.action-active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+.btn-remote-action.action-active .remote-action-title,
+.btn-remote-action.action-active .remote-action-status {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.btn-remote-action.action-active-climate {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+}
+
+.btn-remote-action.action-active-climate .remote-action-title,
+.btn-remote-action.action-active-climate .remote-action-status {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+/* EcoRewards Points Block */
+.rewards-points-block {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rewards-points-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rewards-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #94a3b8;
+}
+
+.rewards-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.rewards-points-value {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.points-unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #34d399;
+}
+
+.rewards-subtext {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
   background: rgba(56, 189, 248, 0.2);
   color: #38bdf8;
   border-color: rgba(56, 189, 248, 0.4);

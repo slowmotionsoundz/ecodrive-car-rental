@@ -12,22 +12,34 @@ export default function AccountPage({
   const [climateOn, setClimateOn] = useState(false);
   const [digitalKeyNotification, setDigitalKeyNotification] = useState('');
 
-  const handleToggleLock = () => {
-    const nextState = !isLocked;
-    setIsLocked(nextState);
-    setDigitalKeyNotification(
-      nextState ? '🔒 Vehicle Locked & Security Alarm Armed' : '🔓 Vehicle Unlocked: Walk up and open door'
-    );
+  const handleLock = () => {
+    setIsLocked(true);
+    setDigitalKeyNotification('🔒 Vehicle Locked & Security Alarm Armed');
+    setTimeout(() => setDigitalKeyNotification(''), 4000);
+  };
+
+  const handleUnlock = () => {
+    setIsLocked(false);
+    setDigitalKeyNotification('🔓 Vehicle Unlocked: Walk up and open any door');
     setTimeout(() => setDigitalKeyNotification(''), 4000);
   };
 
   const handleToggleClimate = () => {
-    setClimateOn(!climateOn);
+    const nextState = !climateOn;
+    setClimateOn(nextState);
     setDigitalKeyNotification(
-      !climateOn ? '❄️ Cabin Preconditioning Started (Set to 68°F)' : 'Cabin Climate Turned Off'
+      nextState ? '❄️ Cabin A/C Started (Set to 68°F)' : 'Cabin Climate Turned Off'
     );
     setTimeout(() => setDigitalKeyNotification(''), 4000);
   };
+
+  const formattedReturnDate = new Date(returnDate).toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 
   return (
     <div className="page-container">
@@ -45,7 +57,7 @@ export default function AccountPage({
         </div>
         <h1 className="page-title">My Account & Active Rental</h1>
         <p className="page-description">
-          Seamlessly command your electric rental in real-time. No physical keys or counter lines required.
+          Real-time controls for your electric rental. Tap below to unlock doors, start the A/C, and track your trip rewards.
         </p>
       </section>
 
@@ -58,46 +70,62 @@ export default function AccountPage({
               <h2 className="active-vehicle-title">{activeRentalCar}</h2>
               <span className="active-hub-sub">Pickup Hub: {selectedHub}</span>
             </div>
-            <div className="vehicle-lock-pill" style={{ color: isLocked ? '#34d399' : '#f87171' }}>
+            <div className={`vehicle-lock-pill ${isLocked ? 'pill-locked' : 'pill-unlocked'}`}>
               <span>{isLocked ? '🔒 Secured' : '🔓 Unlocked'}</span>
             </div>
           </div>
 
-          {/* Digital Key Virtual Keyfob */}
-          <div className="digital-keyfob-box">
-            <div className="keyfob-inner">
-              <span className="keyfob-icon">{isLocked ? '🔒' : '🔓'}</span>
-              <h3>Contactless NFC Digital Key</h3>
-              <p>Hold your smartphone near the driver's B-pillar sensor or use the direct controls below.</p>
-              
-              <div className="keyfob-controls">
-                <button
-                  className={`btn-keyfob ${!isLocked ? 'keyfob-active' : ''}`}
-                  onClick={handleToggleLock}
-                >
-                  {isLocked ? '🔓 Tap to Unlock Vehicle' : '🔒 Tap to Lock Vehicle'}
-                </button>
-
-                <button
-                  className={`btn-keyfob-secondary ${climateOn ? 'climate-active' : ''}`}
-                  onClick={handleToggleClimate}
-                >
-                  {climateOn ? '❄️ Climate: ON (68°F)' : '❄️ Precondition Cabin (68°F)'}
-                </button>
-              </div>
+          {/* Battery Glance Bar */}
+          <div className="battery-glance-card">
+            <div className="battery-glance-header">
+              <span className="battery-label">Battery Level</span>
+              <span className="battery-val text-emerald">78% • ~210 miles range left</span>
+            </div>
+            <div className="battery-track">
+              <div className="battery-fill" style={{ width: '78%' }}></div>
             </div>
           </div>
 
-          {/* Live Telemetry Metrics */}
+          {/* Digital Key Remote Controls */}
+          <div className="digital-key-remote-section">
+            <div className="remote-section-title">Digital Key Remote Controls</div>
+            <div className="remote-buttons-grid">
+              <button
+                type="button"
+                className={`btn-remote-action ${isLocked ? 'action-active' : ''}`}
+                onClick={handleLock}
+              >
+                <span className="remote-action-icon">🔒</span>
+                <span className="remote-action-title">Lock</span>
+                <span className="remote-action-status">{isLocked ? 'Armed' : 'Tap to Lock'}</span>
+              </button>
+
+              <button
+                type="button"
+                className={`btn-remote-action ${!isLocked ? 'action-active' : ''}`}
+                onClick={handleUnlock}
+              >
+                <span className="remote-action-icon">🔓</span>
+                <span className="remote-action-title">Unlock</span>
+                <span className="remote-action-status">{!isLocked ? 'Doors Open' : 'Tap to Unlock'}</span>
+              </button>
+
+              <button
+                type="button"
+                className={`btn-remote-action ${climateOn ? 'action-active-climate' : ''}`}
+                onClick={handleToggleClimate}
+              >
+                <span className="remote-action-icon">❄️</span>
+                <span className="remote-action-title">A/C & Heat</span>
+                <span className="remote-action-status">{climateOn ? 'Running 68°F' : 'Off'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Clean Telemetry Metrics Grid */}
           <div className="account-telemetry-grid">
             <div className="telemetry-box">
-              <span className="telemetry-box-label">Battery State of Charge</span>
-              <strong className="telemetry-box-val text-emerald">78%</strong>
-              <span className="telemetry-box-sub">~210 miles range left</span>
-            </div>
-
-            <div className="telemetry-box">
-              <span className="telemetry-box-label">Trip CO₂ Avoided</span>
+              <span className="telemetry-box-label">Trip CO₂ Saved</span>
               <strong className="telemetry-box-val text-emerald">16.2 kg</strong>
               <span className="telemetry-box-sub">100% Zero tailpipe</span>
             </div>
@@ -105,20 +133,18 @@ export default function AccountPage({
             <div className="telemetry-box">
               <span className="telemetry-box-label">Tire Pressure</span>
               <strong className="telemetry-box-val">38 PSI</strong>
-              <span className="telemetry-box-sub">Optimal pressure</span>
+              <span className="telemetry-box-sub">Optimal condition</span>
             </div>
 
             <div className="telemetry-box">
               <span className="telemetry-box-label">Return Due</span>
-              <strong className="telemetry-box-val">
-                {new Date(returnDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-              </strong>
+              <strong className="telemetry-box-val">{formattedReturnDate}</strong>
               <span className="telemetry-box-sub">{selectedHub.split(' ')[0]} Hub</span>
             </div>
           </div>
         </div>
 
-        {/* Right Sidebar: Profile & Past Trips */}
+        {/* Right Sidebar: Profile & Rewards */}
         <div className="account-sidebar">
           <div className="profile-summary-card">
             <div className="user-avatar-row">
@@ -127,6 +153,19 @@ export default function AccountPage({
                 <h3 className="user-name">Alex Green</h3>
                 <span className="user-tier">EcoDrive Member • Level 3</span>
               </div>
+            </div>
+
+            {/* EcoRewards Points Block (Board Card Requirement) */}
+            <div className="rewards-points-block">
+              <div className="rewards-points-header">
+                <span className="rewards-label">EcoRewards Balance</span>
+                <span className="rewards-badge">+180 pts this trip</span>
+              </div>
+              <div className="rewards-points-value">
+                <span>2,450</span>
+                <span className="points-unit">pts</span>
+              </div>
+              <p className="rewards-subtext">Redeem points for free charging hours or rental upgrades.</p>
             </div>
 
             <div className="lifetime-impact-stats">
