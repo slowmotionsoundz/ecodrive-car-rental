@@ -61,9 +61,9 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   padding: 16px 36px;
   background: rgba(10, 13, 18, 0.85);
   backdrop-filter: blur(16px);
@@ -75,6 +75,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  justify-self: start;
 }
 
 .logo-symbol {
@@ -110,6 +111,11 @@
   display: flex;
   align-items: center;
   gap: 28px;
+  justify-self: center;
+}
+
+.account-link {
+  justify-self: end;
 }
 
 .nav-link {
@@ -138,12 +144,6 @@
   box-shadow: 0 0 10px var(--primary-emerald);
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
 .live-indicator {
   width: 8px;
   height: 8px;
@@ -165,24 +165,6 @@
     opacity: 0.5;
     transform: scale(1.3);
   }
-}
-
-.btn-header-cta {
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: #ffffff;
-  border: none;
-  padding: 9px 20px;
-  border-radius: var(--radius-full);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-  transition: all 0.2s ease;
-}
-
-.btn-header-cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
 }
 
 /* 2. Hero Section */
@@ -1086,12 +1068,6 @@
 
   .brand-tagline {
     display: none;
-  }
-
-  .btn-header-cta {
-    white-space: nowrap;
-    padding: 8px 16px;
-    font-size: 0.85rem;
   }
 
   .nav-menu {
@@ -2062,7 +2038,9 @@
 }
 
 @keyframes battery-flow {
-  to { background-position: 56px 0; }
+  to {
+    background-position: 56px 0;
+  }
 }
 
 .charging-badge {
@@ -2085,8 +2063,17 @@
 }
 
 @keyframes charging-bolt {
-  0%, 100% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); }
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
 }
 
 .battery-charge-row {
@@ -2112,6 +2099,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .is-charging .battery-fill,
   .charging-bolt {
     animation: none;
@@ -2174,9 +2162,19 @@
 }
 
 @keyframes lock-icon-pop {
-  0% { transform: scale(0.5) rotate(-15deg); opacity: 0; }
-  60% { transform: scale(1.2) rotate(6deg); opacity: 1; }
-  100% { transform: scale(1) rotate(0); }
+  0% {
+    transform: scale(0.5) rotate(-15deg);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.2) rotate(6deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2355,7 +2353,7 @@
     border-radius: 0;
   }
 
-  .telemetry-box + .telemetry-box {
+  .telemetry-box+.telemetry-box {
     border-top: 1px solid rgba(255, 255, 255, 0.07);
   }
 
@@ -2596,22 +2594,24 @@
   }
 }
 
-.impact-metric-val{
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+.impact-metric-val {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }
 
-.fleet-card{
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
 @keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
+}
+
+.fleet-card {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }

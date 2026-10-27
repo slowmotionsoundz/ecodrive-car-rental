@@ -32,19 +32,14 @@ export default function Navbar({ selectedHub }) {
         >
           Green Impact
         </NavLink>
-        <NavLink
-          to="/account"
-          className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
-        >
-          My Account
-        </NavLink>
       </nav>
 
-      <div className="header-actions">
-        <Link to="/fleet" className="btn-header-cta">
-          Browse Fleet
-        </Link>
-      </div>
+      <NavLink
+        to="/account"
+        className={({ isActive }) => `nav-link account-link ${isActive ? 'active' : ''}`}
+      >
+        My Account
+      </NavLink>
     </header>
   );
 }
