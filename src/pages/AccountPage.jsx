@@ -41,6 +41,15 @@ export default function AccountPage({
     minute: '2-digit'
   });
 
+  const shortReturnDate = new Date(returnDate)
+    .toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    })
+    .replace(',', ' ·');
+
   return (
     <div className="page-container">
       {/* Toast Alert */}
@@ -152,7 +161,10 @@ export default function AccountPage({
 
             <div className="telemetry-box">
               <span className="telemetry-box-label">Return Due</span>
-              <strong className="telemetry-box-val">{formattedReturnDate}</strong>
+              <strong className="telemetry-box-val">
+                <span className="date-long">{formattedReturnDate}</span>
+                <span className="date-short">{shortReturnDate}</span>
+              </strong>
               <span className="telemetry-box-sub">{selectedHub.split(' ')[0]} Hub</span>
             </div>
           </div>
