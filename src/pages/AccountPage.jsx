@@ -86,18 +86,32 @@ export default function AccountPage({
 
           {/* Battery Glance Bar */}
           <div className={`battery-glance-card ${isCharging ? 'is-charging' : ''}`}>
-            {isCharging && (
-              <span className="charging-badge">
-                <span className="charging-bolt">⚡</span> Charging · 11 kW
-              </span>
-            )}
             <div className="battery-glance-header">
-              <span className="battery-label">Battery Level</span>
-              <span className="battery-val text-emerald">78% • ~210 miles range left</span>
+              <div className="battery-header-left">
+                <span className="battery-label">Battery Level</span>
+                <span className="battery-vehicle-tag">{activeRentalCar}</span>
+              </div>
+              {isCharging ? (
+                <span className="charging-badge">
+                  <span className="charging-bolt">⚡</span> 11 kW Charging
+                </span>
+              ) : (
+                <span className="battery-badge-idle">Plugged out</span>
+              )}
             </div>
+
             <div className="battery-track">
               <div className="battery-fill" style={{ width: '78%' }}></div>
             </div>
+
+            <div className="battery-stats-row">
+              <div className="battery-stat-primary">
+                <span className="battery-pct-val text-emerald">78%</span>
+                <span className="battery-pct-label">Charged</span>
+              </div>
+              <span className="battery-range-estimate">~210 miles range left</span>
+            </div>
+
             <div className="battery-charge-row">
               <span className="battery-charge-note">
                 {isCharging ? '🔌 Plugged in · full in ~35 min' : 'Not plugged in'}
