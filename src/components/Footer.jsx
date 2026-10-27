@@ -6,7 +6,10 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-left">
-          <Link to="/" className="footer-brand">🌱 EcoDrive Car Rental</Link>
+          <Link to="/" className="footer-brand">
+            <span className="footer-brand-icon">🌱</span>
+            <span>EcoDrive Car Rental</span>
+          </Link>
           <p className="footer-desc">
             Accelerating California's transition to sustainable shared transport through 100% electric luxury fleets.
           </p>
