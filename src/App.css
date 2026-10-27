@@ -1126,11 +1126,28 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 1.15rem;
   font-weight: 800;
   color: #ffffff;
   margin-bottom: 6px;
+  text-decoration: none;
+}
+
+.footer-brand-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 .footer-desc {
@@ -1162,6 +1179,31 @@
   text-align: center;
   font-size: 0.8rem;
   color: var(--text-dim);
+}
+
+/* Tablet & Mobile: Centered footer alignment */
+@media (max-width: 868px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-left {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-desc {
+    text-align: center;
+    max-width: 460px;
+  }
+
+  .footer-nav {
+    justify-content: center;
+    gap: 16px 24px;
+  }
 }
 
 /* Responsiveness */
