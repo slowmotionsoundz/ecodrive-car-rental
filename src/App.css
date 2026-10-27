@@ -2003,13 +2003,13 @@
 }
 
 .pill-locked {
-  color: #34d399;
-  border-color: rgba(52, 211, 153, 0.3);
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.3);
 }
 
 .pill-unlocked {
-  color: #f87171;
-  border-color: rgba(248, 113, 113, 0.3);
+  color: #34d399;
+  border-color: rgba(52, 211, 153, 0.3);
 }
 
 /* Battery Glance Bar */
@@ -2071,8 +2071,60 @@
 
 .remote-buttons-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
+}
+
+/* Single lock / unlock status button (matches the A/C & Heat button) */
+.btn-remote-action.lock-state-locked {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: #f87171;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.3);
+}
+
+.btn-remote-action.lock-state-locked .remote-action-title,
+.btn-remote-action.lock-state-locked .remote-action-status {
+  color: #f87171;
+  font-weight: 700;
+}
+
+.btn-remote-action.lock-state-unlocked {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+}
+
+.btn-remote-action.lock-state-unlocked .remote-action-title,
+.btn-remote-action.lock-state-unlocked .remote-action-status {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.btn-remote-action.lock-state-locked:hover {
+  background: rgba(239, 68, 68, 0.24);
+  border-color: #f87171;
+}
+
+.btn-remote-action .lock-icon-pop {
+  animation: lock-icon-pop 0.35s ease;
+}
+
+@keyframes lock-icon-pop {
+  0% { transform: scale(0.5) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(1.2) rotate(6deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-remote-action .lock-icon-pop {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .remote-buttons-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .btn-remote-action {
