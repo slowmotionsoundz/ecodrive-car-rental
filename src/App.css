@@ -2071,6 +2071,70 @@
   transition: width 0.4s ease;
 }
 
+/* Charging state: flowing stripes */
+.is-charging .battery-fill {
+  background: repeating-linear-gradient(110deg, #10b981 0 14px, #34d399 14px 28px);
+  background-size: 56px 100%;
+  animation: battery-flow 1s linear infinite;
+}
+
+@keyframes battery-flow {
+  to { background-position: 56px 0; }
+}
+
+.charging-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid #10b981;
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+}
+
+.charging-bolt {
+  display: inline-block;
+  animation: charging-bolt 1.2s ease-in-out infinite;
+}
+
+@keyframes charging-bolt {
+  0%, 100% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.battery-charge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.battery-charge-toggle {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.battery-charge-toggle:hover {
+  color: #34d399;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-charging .battery-fill,
+  .charging-bolt {
+    animation: none;
+  }
+}
+
 /* Digital Key Remote Controls */
 .digital-key-remote-section {
   display: flex;
