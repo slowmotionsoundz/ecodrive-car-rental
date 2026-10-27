@@ -41,10 +41,6 @@ export default function Navbar({ selectedHub }) {
       </nav>
 
       <div className="header-actions">
-        <div className="hub-status-pill">
-          <span className="live-indicator"></span>
-          <span>{selectedHub ? selectedHub.split(' ')[0] : 'SFO'} Active</span>
-        </div>
         <Link to="/fleet" className="btn-header-cta">
           Browse Fleet
         </Link>
