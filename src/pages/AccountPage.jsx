@@ -12,15 +12,14 @@ export default function AccountPage({
   const [climateOn, setClimateOn] = useState(false);
   const [digitalKeyNotification, setDigitalKeyNotification] = useState('');
 
-  const handleLock = () => {
-    setIsLocked(true);
-    setDigitalKeyNotification('🔒 Vehicle Locked & Security Alarm Armed');
-    setTimeout(() => setDigitalKeyNotification(''), 4000);
-  };
-
-  const handleUnlock = () => {
-    setIsLocked(false);
-    setDigitalKeyNotification('🔓 Vehicle Unlocked: Walk up and open any door');
+  const handleToggleLock = () => {
+    const nextLocked = !isLocked;
+    setIsLocked(nextLocked);
+    setDigitalKeyNotification(
+      nextLocked
+        ? '🔒 Vehicle Locked & Security Alarm Armed'
+        : '🔓 Vehicle Unlocked: Walk up and open any door'
+    );
     setTimeout(() => setDigitalKeyNotification(''), 4000);
   };
 
@@ -92,22 +91,19 @@ export default function AccountPage({
             <div className="remote-buttons-grid">
               <button
                 type="button"
-                className={`btn-remote-action ${isLocked ? 'action-active' : ''}`}
-                onClick={handleLock}
+                className={`btn-remote-action ${isLocked ? 'lock-state-locked' : 'lock-state-unlocked'}`}
+                onClick={handleToggleLock}
+                aria-label={isLocked ? 'The car is locked. Tap to unlock.' : 'The doors are open. Tap to lock.'}
               >
-                <span className="remote-action-icon">🔒</span>
-                <span className="remote-action-title">Lock</span>
-                <span className="remote-action-status">{isLocked ? 'Armed' : 'Tap to Lock'}</span>
-              </button>
-
-              <button
-                type="button"
-                className={`btn-remote-action ${!isLocked ? 'action-active' : ''}`}
-                onClick={handleUnlock}
-              >
-                <span className="remote-action-icon">🔓</span>
-                <span className="remote-action-title">Unlock</span>
-                <span className="remote-action-status">{!isLocked ? 'Doors Open' : 'Tap to Unlock'}</span>
+                <span key={isLocked ? 'locked' : 'unlocked'} className="remote-action-icon lock-icon-pop">
+                  {isLocked ? '🔒' : '🔓'}
+                </span>
+                <span className="remote-action-title">
+                  {isLocked ? 'The car is locked' : 'The doors are open'}
+                </span>
+                <span className="remote-action-status">
+                  {isLocked ? 'Tap to unlock' : 'Tap to lock'}
+                </span>
               </button>
 
               <button
