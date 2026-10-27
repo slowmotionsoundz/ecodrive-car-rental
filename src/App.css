@@ -2557,3 +2557,23 @@
     border-radius: var(--radius-md);
   }
 }
+
+.impact-metric-val{
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.fleet-card{
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
