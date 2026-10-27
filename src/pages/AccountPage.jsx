@@ -10,6 +10,7 @@ export default function AccountPage({
   setIsLocked
 }) {
   const [climateOn, setClimateOn] = useState(false);
+  const [isCharging, setIsCharging] = useState(true);
   const [digitalKeyNotification, setDigitalKeyNotification] = useState('');
 
   const handleToggleLock = () => {
@@ -75,13 +76,30 @@ export default function AccountPage({
           </div>
 
           {/* Battery Glance Bar */}
-          <div className="battery-glance-card">
+          <div className={`battery-glance-card ${isCharging ? 'is-charging' : ''}`}>
+            {isCharging && (
+              <span className="charging-badge">
+                <span className="charging-bolt">⚡</span> Charging · 11 kW
+              </span>
+            )}
             <div className="battery-glance-header">
               <span className="battery-label">Battery Level</span>
               <span className="battery-val text-emerald">78% • ~210 miles range left</span>
             </div>
             <div className="battery-track">
               <div className="battery-fill" style={{ width: '78%' }}></div>
+            </div>
+            <div className="battery-charge-row">
+              <span className="battery-charge-note">
+                {isCharging ? '🔌 Plugged in · full in ~35 min' : 'Not plugged in'}
+              </span>
+              <button
+                type="button"
+                className="battery-charge-toggle"
+                onClick={() => setIsCharging(!isCharging)}
+              >
+                {isCharging ? 'Unplug' : 'Plug in'}
+              </button>
             </div>
           </div>
 
