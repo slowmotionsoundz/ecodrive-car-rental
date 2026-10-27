@@ -144,19 +144,6 @@
   gap: 16px;
 }
 
-.hub-status-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #34d399;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-}
-
 .live-indicator {
   width: 8px;
   height: 8px;
@@ -1098,10 +1085,6 @@
   }
 
   .brand-tagline {
-    display: none;
-  }
-
-  .hub-status-pill {
     display: none;
   }
 
