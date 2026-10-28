@@ -130,7 +130,7 @@ export default function HomePage({
   };
 
   const handleSearchSubmit = () => {
-    navigate('/fleet');
+    navigate('/booking', { state: { fromHome: true } });
   };
 
   // Format date helper for human-friendly luxury display
@@ -339,7 +339,10 @@ export default function HomePage({
                       </Link>
                       <button
                         className={`btn-reserve ${activeRentalCar === car.name ? 'btn-selected' : ''}`}
-                        onClick={() => onReserveCar(car)}
+                        onClick={() => {
+                          onReserveCar(car);
+                          navigate('/booking', { state: { preselectedCar: car, fromHome: true } });
+                        }}
                       >
                         {activeRentalCar === car.name ? '✓ Selected' : 'Reserve'}
                       </button>
