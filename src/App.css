@@ -107,6 +107,10 @@
   font-weight: 600;
 }
 
+.nav-layout {
+  display: contents;
+}
+
 .nav-menu {
   display: flex;
   align-items: center;
@@ -116,6 +120,10 @@
 
 .account-link {
   justify-self: end;
+}
+
+.menu-toggle {
+  display: none;
 }
 
 .nav-link {
@@ -1102,8 +1110,13 @@
 }
 
 @keyframes telemetryShimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 /* 4. Footer */
@@ -1229,14 +1242,89 @@
 @media (max-width: 768px) {
   .header {
     padding: 12px 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .brand-tagline {
     display: none;
   }
 
-  .nav-menu {
+  .nav-layout {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 8px 16px 16px;
+    background: rgba(10, 13, 18, 0.97);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-layout.is-open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-layout .nav-link {
+    display: block;
+    padding: 14px 8px;
+  }
+
+  .nav-layout .nav-link.active::after {
+    display: none;
+  }
+
+  .nav-layout .account-link {
+    justify-self: auto;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4px;
+    padding-top: 16px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    justify-self: end;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .menu-toggle.is-open span:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-toggle.is-open span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
   }
 
   .hero-section {
