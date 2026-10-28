@@ -276,7 +276,7 @@ export default function HomePage({
             </div>
             <div className="availability-chip">
               <span className="green-pulse-dot"></span>
-              <span>● 98% Fleet Available Today</span>
+              <span>98% Fleet Available Today</span>
             </div>
           </div>
 
