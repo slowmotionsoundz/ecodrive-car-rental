@@ -20,9 +20,9 @@ export default function SustainabilityPage() {
         <div className="hero-pill">
           <span>🌱 Verified Carbon-Neutral Mobility</span>
         </div>
-        <h1 className="page-title">Driving Towards Real Zero Emissions</h1>
+        <h1 className="page-title">100% Electric. 100% Clean Energy.</h1>
         <p className="page-description">
-          At EcoDrive, sustainability isn't an afterthought. 100% of our fleet runs on zero-emission electricity sourced directly from California solar farms and certified wind generation.
+          Every EcoDrive vehicle is powered by California solar and wind. No tailpipes, no greenwashing, and zero emissions from start to finish.
         </p>
       </section>
 

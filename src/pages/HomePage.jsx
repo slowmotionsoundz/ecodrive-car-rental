@@ -176,7 +176,7 @@ export default function HomePage({
             <span className="hero-pill-icon">⚡</span>
             <span>Next-Generation Sustainable Mobility</span>
           </div>
-          <h1 className="hero-title">Rent 100% Electric. Drive Carbon-Free.</h1>
+          <h1 className="hero-title">Drive 100% Electric.</h1>
           <p className="hero-description">
             Instant mobile booking, guaranteed zero-emission models, and contactless digital key pickup.
           </p>
@@ -250,12 +250,12 @@ export default function HomePage({
             </div>
             <div className="availability-chip">
               <span className="green-pulse-dot"></span>
-              <span>● 98% Fleet Available Today</span>
+              <span>98% Fleet Available Today</span>
             </div>
           </div>
 
           <div className="fleet-cards-grid">
-            {fleetData.map((car) => (
+            {fleetData.slice(0, 3).map((car) => (
               <div key={car.id} className="fleet-card">
                 <div className="card-image-wrapper">
                   <Link to={`/fleet/${car.id}`}>
@@ -322,16 +322,6 @@ export default function HomePage({
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="view-all-fleet-banner">
-            <div>
-              <h3>Explore Our Complete Zero-Emission Lineup</h3>
-              <p>Compare full specs, 800V fast-charging capabilities, and cargo space.</p>
-            </div>
-            <Link to="/fleet" className="btn-primary-large">
-              View All Vehicles →
-            </Link>
           </div>
         </main>
 
@@ -461,6 +451,16 @@ export default function HomePage({
             </Link>
           </div>
         </aside>
+
+        <div className="view-all-fleet-banner">
+          <div>
+            <h3>Explore Our Complete Zero-Emission Lineup</h3>
+            <p>Compare full specs, 800V fast-charging capabilities, and cargo space.</p>
+          </div>
+          <Link to="/fleet" className="btn-primary-large">
+            View All Vehicles →
+          </Link>
+        </div>
       </div>
     </div>
   );
