@@ -1,46 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fleetData } from '../data/fleetData';
-
-// Web Audio API: Option C Dual Glass Clink (Two gentle crystal "wine toast" pings)
-function playDualGlassToast() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const now = ctx.currentTime;
-
-    [0, 0.07].forEach((delay, idx) => {
-      // Primary crystal resonance
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      const freq = idx === 0 ? 2400 : 3100;
-      osc.frequency.setValueAtTime(freq, now + delay);
-      gain.gain.setValueAtTime(0.08, now + delay);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 0.15);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now + delay);
-      osc.stop(now + delay + 0.15);
-
-      // Micro transient impact tink
-      const ping = ctx.createOscillator();
-      const pingGain = ctx.createGain();
-      ping.type = 'triangle';
-      ping.frequency.setValueAtTime(4200, now + delay);
-      ping.frequency.exponentialRampToValueAtTime(1600, now + delay + 0.015);
-      pingGain.gain.setValueAtTime(0.07, now + delay);
-      pingGain.gain.exponentialRampToValueAtTime(0.0001, now + delay + 0.02);
-      ping.connect(pingGain);
-      pingGain.connect(ctx.destination);
-      ping.start(now + delay);
-      ping.stop(now + delay + 0.02);
-    });
-  } catch (err) {
-    // Graceful fallback if audio is restricted by browser policy
-  }
-}
 
 export default function HomePage({
   selectedHub,
@@ -50,9 +10,7 @@ export default function HomePage({
   returnDate,
   setReturnDate,
   activeRentalCar,
-  onReserveCar,
-  isLocked,
-  setIsLocked
+  onReserveCar
 }) {
   const navigate = useNavigate();
   const [aiPrompt, setAiPrompt] = useState('');
@@ -61,51 +19,13 @@ export default function HomePage({
   );
   const [isAiLoading, setIsAiLoading] = useState(false);
 
-  // Slider State & Handlers
-  const sliderTrackRef = useRef(null);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragStartXRef = useRef(0);
-
-  const toggleLockWithAudio = (nextLocked) => {
-    playDualGlassToast();
-    setIsLocked(nextLocked !== undefined ? nextLocked : !isLocked);
-    setDragOffset(0);
-  };
-
-  const handlePointerDown = (e) => {
-    setIsDragging(true);
-    dragStartXRef.current = e.clientX;
-    e.currentTarget.setPointerCapture(e.pointerId);
-  };
-
-  const handlePointerMove = (e) => {
-    if (!isDragging || !sliderTrackRef.current) return;
-    const trackWidth = sliderTrackRef.current.clientWidth;
-    const maxDrag = Math.max(0, trackWidth - 48 - 8); // knob width (48px) + padding
-    let delta = e.clientX - dragStartXRef.current;
-    if (delta < 0) delta = 0;
-    if (delta > maxDrag) delta = maxDrag;
-    setDragOffset(delta);
-
-    if (delta >= maxDrag * 0.78) {
-      setIsDragging(false);
-      toggleLockWithAudio(!isLocked);
-    }
-  };
-
-  const handlePointerUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    setDragOffset(0);
-  };
-
-  const handleAiSubmit = (e) => {
+  const handleAiSubmit = (e, customQuery) => {
     if (e) e.preventDefault();
-    if (!aiPrompt.trim()) return;
+    const rawQuery = customQuery !== undefined ? customQuery : aiPrompt;
+    if (!rawQuery.trim()) return;
 
     setIsAiLoading(true);
-    const query = aiPrompt.toLowerCase();
+    const query = rawQuery.toLowerCase();
 
     setTimeout(() => {
       if (query.includes('tahoe') || query.includes('mountain') || query.includes('yosemite')) {
@@ -264,22 +184,22 @@ export default function HomePage({
         </div>
       </section>
 
-      {/* 3. Main Catalog & Telemetry Sidebar */}
+      {/* 3. Main Catalog & AI Assistant Sidebar */}
       <div className="catalog-telemetry-wrapper">
-        <main className="catalog-main" id="fleet">
-          <div className="catalog-header-bar">
-            <div>
-              <h2 className="section-title">Featured Zero-Emission Fleet</h2>
-              <p className="section-subtitle">
-                Guaranteed high-spec models with complimentary Supercharging & carbon offset certification
-              </p>
-            </div>
-            <div className="availability-chip">
-              <span className="green-pulse-dot"></span>
-              <span>98% Fleet Available Today</span>
-            </div>
+        <div className="catalog-header-bar">
+          <div>
+            <h2 className="section-title">Featured Zero-Emission Fleet</h2>
+            <p className="section-subtitle">
+              Guaranteed high-spec models with complimentary Supercharging & carbon offset certification
+            </p>
           </div>
+          <div className="availability-chip">
+            <span className="green-pulse-dot"></span>
+            <span>98% Fleet Available Today</span>
+          </div>
+        </div>
 
+        <main className="catalog-main" id="fleet">
           <div className="fleet-cards-grid">
             {fleetData.slice(0, 3).map((car) => (
               <div key={car.id} className="fleet-card">
@@ -387,8 +307,9 @@ export default function HomePage({
                 type="button"
                 className="suggestion-chip"
                 onClick={() => {
-                  setAiPrompt('Fast chargers near SFO');
-                  setTimeout(() => handleAiSubmit(), 50);
+                  const q = 'Fast chargers near SFO';
+                  setAiPrompt(q);
+                  handleAiSubmit(null, q);
                 }}
               >
                 📍 SFO Fast Chargers
@@ -397,84 +318,25 @@ export default function HomePage({
                 type="button"
                 className="suggestion-chip"
                 onClick={() => {
-                  setAiPrompt('How much CO2 will I avoid saving?');
-                  setTimeout(() => handleAiSubmit(), 50);
+                  const q = 'How much CO2 will I avoid saving?';
+                  setAiPrompt(q);
+                  handleAiSubmit(null, q);
                 }}
               >
                 🌿 CO₂ Calculation
               </button>
-            </div>
-          </div>
-
-          {/* Live Telemetry Widget */}
-          <div className="telemetry-widget-card" id="sustainability">
-            <div className="telemetry-card-header">
-              <div className="telemetry-status-dot"></div>
-              <h4 className="telemetry-heading">Live Trip Telemetry</h4>
-            </div>
-
-            <div className="telemetry-metric-item">
-              <span className="metric-label">CO₂ Avoided This Month</span>
-              <strong className="metric-val text-emerald">16.2 kg CO₂</strong>
-            </div>
-
-            <div className="telemetry-metric-item">
-              <span className="metric-label">Active Rental Battery</span>
-              <strong className="metric-val">78% (210 mi left)</strong>
-            </div>
-
-            <div className="telemetry-metric-item">
-              <span className="metric-label">Vehicle Lock Status</span>
-              <div className="telemetry-lock-status-val">
-                <strong className="metric-val">
-                  {isLocked ? '🔒 Secured' : '🔓 Unlocked'}
-                </strong>
-                <span className={`telemetry-lock-subtext ${!isLocked ? 'text-emerald' : ''}`}>
-                  {isLocked ? 'Alarm armed' : 'Ready to drive'}
-                </span>
-              </div>
-            </div>
-
-            <div className="telemetry-progress-block">
-              <div className="progress-labels">
-                <span>Trip Efficiency Rating</span>
-                <span className="text-emerald font-bold">96% Eco</span>
-              </div>
-              <div className="progress-track">
-                <div className="progress-bar-fill" style={{ width: '96%' }}></div>
-              </div>
-            </div>
-
-            {/* Slide-to-Unlock / Lock slider with Amber/Gold styling & tactile audio */}
-            <div className="telemetry-slider-container">
-              <div
-                ref={sliderTrackRef}
-                className={`telemetry-slider-track ${isLocked ? 'track-locked-amber' : 'track-unlocked-green'}`}
-                onClick={() => toggleLockWithAudio(!isLocked)}
+              <button
+                type="button"
+                className="suggestion-chip"
+                onClick={() => {
+                  const q = 'Can I drive to Yosemite on one charge?';
+                  setAiPrompt(q);
+                  handleAiSubmit(null, q);
+                }}
               >
-                <div
-                  className={`telemetry-slider-knob ${isLocked ? 'knob-locked-amber' : 'knob-unlocked-green'}`}
-                  style={{
-                    transform: `translateX(${dragOffset}px)`,
-                    transition: isDragging ? 'none' : 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
-                  }}
-                  onPointerDown={handlePointerDown}
-                  onPointerMove={handlePointerMove}
-                  onPointerUp={handlePointerUp}
-                  onPointerCancel={handlePointerUp}
-                  title="Drag or click to toggle lock"
-                >
-                  <span className="knob-icon">{isLocked ? '🔒' : '🔓'}</span>
-                </div>
-                <div className={`telemetry-slider-label ${isLocked ? 'shimmer-amber' : 'shimmer-green'}`}>
-                  {isLocked ? 'Slide to Unlock →' : 'Slide to Lock 🔒'}
-                </div>
-              </div>
+                🏔️ Yosemite Range
+              </button>
             </div>
-
-            <Link to="/account" className="telemetry-link-sub">
-              Manage Active Rental & Digital Pass →
-            </Link>
           </div>
         </aside>
 
