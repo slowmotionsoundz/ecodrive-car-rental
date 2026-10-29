@@ -234,44 +234,40 @@ export default function RentalRangePicker({
           onClick={() => setIsOpen(!isOpen)}
           role="button"
           tabIndex={0}
+          aria-label="Select rental dates and times"
         >
-          <div 
-            className={`range-slot ${activeStep === 'pickup' && isOpen ? 'active-slot' : ''}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveStep('pickup');
-              setIsOpen(true);
-            }}
-          >
-            <span className="slot-badge">📍 Pick-up Date & Time</span>
-            <span className="slot-value">{formatDisplayDate(tempStart, pickupTime)}</span>
+          <div className="range-picker-trigger-body">
+            <div 
+              className={`range-slot ${activeStep === 'pickup' && isOpen ? 'active-slot' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveStep('pickup');
+                setIsOpen(true);
+              }}
+            >
+              <span className="slot-badge">📍 Pick-up</span>
+              <span className="slot-value">{formatDisplayDate(tempStart, pickupTime)}</span>
+            </div>
+
+            <div className="range-slot-arrow">→</div>
+
+            <div 
+              className={`range-slot ${activeStep === 'return' && isOpen ? 'active-slot' : ''}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveStep('return');
+                setIsOpen(true);
+              }}
+            >
+              <span className="slot-badge">🏁 Return</span>
+              <span className="slot-value">{formatDisplayDate(tempEnd, returnTime)}</span>
+            </div>
           </div>
 
-          <div className="range-slot-arrow">→</div>
-
-          <div 
-            className={`range-slot ${activeStep === 'return' && isOpen ? 'active-slot' : ''}`}
-            onClick={(e) => {
-              e.stopPropagation();
-              setActiveStep('return');
-              setIsOpen(true);
-            }}
-          >
-            <span className="slot-badge">🏁 Return Date & Time</span>
-            <span className="slot-value">{formatDisplayDate(tempEnd, returnTime)}</span>
+          <div className="range-picker-edit-icon" title="Edit Dates">
+            <span>📅</span>
+            <span className="edit-hint-text">{isOpen ? 'Close' : 'Edit'}</span>
           </div>
-
-          <button 
-            type="button" 
-            className="range-picker-edit-btn" 
-            aria-label="Toggle Date Picker"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsOpen(!isOpen);
-            }}
-          >
-            {isOpen ? '✕' : '📅 Edit'}
-          </button>
         </div>
       )}
 
