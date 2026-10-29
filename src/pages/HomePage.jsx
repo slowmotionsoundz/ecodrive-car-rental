@@ -349,16 +349,6 @@ export default function HomePage({
               </div>
             ))}
           </div>
-
-          <div className="view-all-fleet-banner">
-            <div>
-              <h3>Explore Our Complete Zero-Emission Lineup</h3>
-              <p>Compare full specs, 800V fast-charging capabilities, and cargo space.</p>
-            </div>
-            <Link to="/fleet" className="btn-primary-large">
-              View All Vehicles →
-            </Link>
-          </div>
         </main>
 
         <aside className="telemetry-aside">
@@ -487,6 +477,16 @@ export default function HomePage({
             </Link>
           </div>
         </aside>
+
+        <div className="view-all-fleet-banner">
+          <div>
+            <h3>Explore Our Complete Zero-Emission Lineup</h3>
+            <p>Compare full specs, 800V fast-charging capabilities, and cargo space.</p>
+          </div>
+          <Link to="/fleet" className="btn-primary-large">
+            View All Vehicles →
+          </Link>
+        </div>
       </div>
     </div>
   );

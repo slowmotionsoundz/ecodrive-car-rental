@@ -224,8 +224,9 @@
   margin-bottom: 38px;
 }
 
-/* Luxury Floating Search Capsule (Idea 1) */
-.luxury-search-capsule {
+/* Shared floating capsule appearance */
+.luxury-search-capsule,
+.view-all-fleet-banner {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
@@ -235,9 +236,12 @@
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
-  padding: 10px 14px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.08);
   text-align: left;
+}
+
+.luxury-search-capsule {
+  padding: 10px 14px;
 }
 
 .search-segment {
@@ -1504,15 +1508,14 @@
 }
 
 .view-all-fleet-banner {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(17, 24, 39, 0.9) 100%);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  border-radius: var(--radius-lg);
+  grid-column: 1 / -1;
   padding: 24px 32px;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 20px;
-  margin-top: 16px;
+}
+
+.view-all-fleet-banner .btn-primary-large {
+  flex-shrink: 0;
 }
 
 .view-all-fleet-banner h3 {
@@ -2862,6 +2865,11 @@
   .cta-banner {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .view-all-fleet-banner {
+    align-items: stretch;
+    padding: 20px;
   }
 
   /* Mobile stacked card action bar */
