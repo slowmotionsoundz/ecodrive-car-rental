@@ -175,7 +175,7 @@ export default function HomePage({
             <span className="hero-pill-icon">⚡</span>
             <span>Next-Generation Sustainable Mobility</span>
           </div>
-          <h1 className="hero-title">Rent 100% Electric. Drive Carbon-Free.</h1>
+          <h1 className="hero-title">Drive 100% Electric.</h1>
           <p className="hero-description">
             Instant mobile booking, guaranteed zero-emission models, and contactless digital key pickup.
           </p>

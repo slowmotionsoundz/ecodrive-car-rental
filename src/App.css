@@ -214,6 +214,7 @@
   letter-spacing: -1.2px;
   color: #ffffff;
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 
 .hero-description {
