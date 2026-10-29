@@ -686,18 +686,21 @@
 
 /* Card Action Bar */
 .card-action-bar {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "price details"
+    "reserve reserve";
   align-items: center;
-  justify-content: space-between;
+  row-gap: 10px;
+  column-gap: 8px;
   margin-top: auto;
   padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .card-action-buttons {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: contents;
 }
 
 .details-arrow {
@@ -706,17 +709,20 @@
 
 .fleet-page-card .card-action-bar {
   margin-top: 0;
-  gap: 12px;
-}
-
-.fleet-page-card .period-label {
-  white-space: nowrap;
+  column-gap: 8px;
 }
 
 .price-container {
+  grid-area: price;
   display: flex;
   align-items: baseline;
   gap: 4px;
+}
+
+.btn-details-link {
+  grid-area: details;
+  justify-self: end;
+  white-space: nowrap;
 }
 
 .currency-val {
@@ -728,9 +734,12 @@
 .period-label {
   font-size: 0.85rem;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .btn-reserve {
+  grid-area: reserve;
+  width: 100%;
   background: rgba(16, 185, 129, 0.15);
   color: #34d399;
   border: 1px solid rgba(52, 211, 153, 0.4);
@@ -738,6 +747,7 @@
   border-radius: var(--radius-md);
   font-size: 0.88rem;
   font-weight: 700;
+  text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
 }
