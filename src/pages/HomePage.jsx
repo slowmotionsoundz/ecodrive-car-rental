@@ -281,7 +281,7 @@ export default function HomePage({
           </div>
 
           <div className="fleet-cards-grid">
-            {fleetData.map((car) => (
+            {fleetData.slice(0, 3).map((car) => (
               <div key={car.id} className="fleet-card">
                 <div className="card-image-wrapper">
                   <Link to={`/fleet/${car.id}`}>
