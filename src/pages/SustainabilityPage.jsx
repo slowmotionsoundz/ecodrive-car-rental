@@ -20,9 +20,9 @@ export default function SustainabilityPage() {
         <div className="hero-pill">
           <span>🌱 Verified Carbon-Neutral Mobility</span>
         </div>
-        <h1 className="page-title">Driving Towards Real Zero Emissions</h1>
+        <h1 className="page-title">100% Electric. 100% Clean Energy.</h1>
         <p className="page-description">
-          At EcoDrive, sustainability isn't an afterthought. 100% of our fleet runs on zero-emission electricity sourced directly from California solar farms and certified wind generation.
+          Every EcoDrive vehicle is powered by California solar and wind. No tailpipes, no greenwashing, and zero emissions from start to finish.
         </p>
       </section>
 
@@ -65,28 +65,28 @@ export default function SustainabilityPage() {
               <span className="impact-icon">💨</span>
               <div className="impact-metric-val text-emerald">{co2SavedKg} kg</div>
               <div className="impact-metric-label">CO₂ Emissions Avoided</div>
-              <p className="impact-desc">Equivalent to keeping a gas car parked for {Math.round(miles / 30)} days.</p>
+              <p className="impact-desc">Like taking a regular gas car off the road for {Math.round(miles / 30)} days.</p>
             </div>
 
             <div className="impact-card">
               <span className="impact-icon">⛽</span>
               <div className="impact-metric-val">{gasGallonsSaved} gal</div>
               <div className="impact-metric-label">Gasoline Never Burned</div>
-              <p className="impact-desc">Zero crude oil extracted, refined, or combusted into the atmosphere.</p>
+              <p className="impact-desc">Gas you didn't have to pump or burn into the air.</p>
             </div>
 
             <div className="impact-card">
               <span className="impact-icon">💵</span>
               <div className="impact-metric-val">${gasCostSaved}</div>
               <div className="impact-metric-label">Fuel Expenses Saved</div>
-              <p className="impact-desc">Based on $5.25/gallon California gas vs free Supercharging.</p>
+              <p className="impact-desc">Real cash kept in your wallet by skipping California gas pumps.</p>
             </div>
 
             <div className="impact-card">
               <span className="impact-icon">🌲</span>
               <div className="impact-metric-val text-emerald">{Math.max(1, treesEquivalent)}</div>
               <div className="impact-metric-label">Trees Equivalent</div>
-              <p className="impact-desc">Equivalent annual carbon sequestration of a growing urban forest.</p>
+              <p className="impact-desc">The clean-air impact of planting {Math.max(1, treesEquivalent)} trees for a full year.</p>
             </div>
           </div>
         </div>
@@ -98,25 +98,25 @@ export default function SustainabilityPage() {
         <div className="pillars-grid">
           <div className="pillar-card">
             <div className="pillar-icon">☀️</div>
-            <h3>100% Renewable Hubs</h3>
+            <h3>Solar-Powered Hubs</h3>
             <p>
-              Our SFO, San Jose, and Downtown SF hubs feature direct solar canopies with on-site Megapack battery storage to charge vehicles cleanly.
+              Our airport hubs run on rooftop solar, so every charge comes from 100% clean sunshine.
             </p>
           </div>
 
           <div className="pillar-card">
             <div className="pillar-icon">🔄</div>
-            <h3>Closed-Loop Battery Lifecycle</h3>
+            <h3>Responsible Recycling</h3>
             <p>
-              Every battery in our fleet is monitored with real-time state of health telemetry and guaranteed secondary-life recycling through Redwood Materials.
+              All car batteries are tracked for health and recycled into clean energy storage when retired.
             </p>
           </div>
 
           <div className="pillar-card">
             <div className="pillar-icon">📄</div>
-            <h3>Certified Carbon Certificates</h3>
+            <h3>Green Trip Receipts</h3>
             <p>
-              Download a cryptographically verified Carbon Avoidance Certificate for your corporate expense reports or personal sustainability audits.
+              Get an official certificate showing your exact CO₂ savings, ready for your work expense reports.
             </p>
           </div>
         </div>

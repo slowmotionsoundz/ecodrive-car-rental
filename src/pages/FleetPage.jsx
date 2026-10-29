@@ -149,9 +149,9 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
                     <span className="currency-val">${car.price}</span>
                     <span className="period-label">/ day</span>
                   </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
+                  <div className="card-action-buttons">
                     <Link to={`/fleet/${car.id}`} className="btn-details-link">
-                      Vehicle Details
+                      Details
                     </Link>
                     <button
                       className={`btn-reserve ${activeRentalCar === car.name ? 'btn-selected' : ''}`}

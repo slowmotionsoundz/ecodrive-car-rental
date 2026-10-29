@@ -13,10 +13,21 @@ import BookingPage from './pages/BookingPage';
 
 import './App.css';
 
+const getDateTimeWithOffset = (dayOffset, time) => {
+  const date = new Date();
+  date.setDate(date.getDate() + dayOffset);
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}T${time}`;
+};
+
 export default function App() {
   const [selectedHub, setSelectedHub] = useState('SFO Airport Hub');
-  const [pickupDate, setPickupDate] = useState('2026-10-22T10:00');
-  const [returnDate, setReturnDate] = useState('2026-10-25T18:00');
+  const [pickupDate, setPickupDate] = useState(() => getDateTimeWithOffset(-1, '10:00'));
+  const [returnDate, setReturnDate] = useState(() => getDateTimeWithOffset(6, '18:00'));
   const [activeRentalCar, setActiveRentalCar] = useState('Tesla Model Y Long Range');
   const [isLocked, setIsLocked] = useState(true);
   const [bookingToast, setBookingToast] = useState('');

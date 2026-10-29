@@ -16,9 +16,9 @@ export default function Footer() {
         </div>
         <div className="footer-nav">
           <Link to="/">Home</Link>
-          <Link to="/fleet">Fleet Models</Link>
-          <Link to="/sustainability">Carbon Offsetting</Link>
-          <Link to="/account">Support & Hubs</Link>
+          <Link to="/fleet">Fleet Catalog</Link>
+          <Link to="/sustainability">Green Impact</Link>
+          <Link to="/account">My Account</Link>
         </div>
       </div>
       <div className="footer-bottom-bar">
