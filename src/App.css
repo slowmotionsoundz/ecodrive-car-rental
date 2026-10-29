@@ -2857,7 +2857,28 @@
   }
 }
 
+@media (max-width: 768px) {
+  .page-container {
+    padding: 24px 16px 48px;
+  }
+}
+
 @media (max-width: 640px) {
+  .page-container {
+    padding: 16px 12px 40px;
+  }
+
+  .detail-specs-card,
+  .features-included-card,
+  .sticky-booking-card {
+    padding: 18px 16px;
+  }
+
+  .specs-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .features-list {
     grid-template-columns: 1fr;
   }
