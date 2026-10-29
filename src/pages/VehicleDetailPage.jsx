@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getCarById, hubsData } from '../data/fleetData';
+import RentalRangePicker from '../components/RentalRangePicker';
 
 export default function VehicleDetailPage({
   selectedHub,
@@ -188,23 +189,15 @@ export default function VehicleDetailPage({
                   </select>
                 </div>
 
+                {/* Unified Range Picker (Option 1) */}
                 <div className="booking-field">
-                  <label className="field-label">📅 Pick-up Date & Time</label>
-                  <input
-                    type="datetime-local"
-                    className="search-input"
-                    value={pickupDate}
-                    onChange={(e) => setPickupDate(e.target.value)}
-                  />
-                </div>
-
-                <div className="booking-field">
-                  <label className="field-label">🏁 Return Date & Time</label>
-                  <input
-                    type="datetime-local"
-                    className="search-input"
-                    value={returnDate}
-                    onChange={(e) => setReturnDate(e.target.value)}
+                  <RentalRangePicker
+                    pickupDate={pickupDate}
+                    returnDate={returnDate}
+                    onRangeChange={({ pickupDate: newPickup, returnDate: newReturn }) => {
+                      setPickupDate(newPickup);
+                      setReturnDate(newReturn);
+                    }}
                   />
                 </div>
 
