@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { fleetData, categories } from '../data/fleetData';
 
 export default function FleetPage({ onReserveCar, activeRentalCar }) {
+  const navigate = useNavigate();
   const [filterCategory, setFilterCategory] = useState('all');
   const [sortBy, setSortBy] = useState('popular');
   const [showAll, setShowAll] = useState(false);
@@ -154,7 +155,10 @@ export default function FleetPage({ onReserveCar, activeRentalCar }) {
                     </Link>
                     <button
                       className={`btn-reserve ${activeRentalCar === car.name ? 'btn-selected' : ''}`}
-                      onClick={() => onReserveCar(car)}
+                      onClick={() => {
+                        onReserveCar(car);
+                        navigate('/booking', { state: { preselectedCar: car, fromHome: true } });
+                      }}
                     >
                       {activeRentalCar === car.name ? '✓ Selected' : 'Reserve'}
                     </button>

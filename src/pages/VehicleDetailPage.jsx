@@ -40,7 +40,7 @@ export default function VehicleDetailPage({
 
   const handleConfirmReservation = () => {
     onReserveCar(car);
-    setBookingConfirmed(true);
+    navigate('/booking', { state: { preselectedCar: car, fromDetail: true } });
   };
 
   return (
