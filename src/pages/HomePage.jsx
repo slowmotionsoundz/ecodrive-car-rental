@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fleetData } from '../data/fleetData';
+import RentalRangePicker from '../components/RentalRangePicker';
 
 // Web Audio API: Option C Dual Glass Clink (Two gentle crystal "wine toast" pings)
 function playDualGlassToast() {
@@ -206,43 +207,16 @@ export default function HomePage({
 
             <div className="segment-divider"></div>
 
-            {/* Pickup Date Segment */}
-            <div className="search-segment search-segment-date">
-              <div className="segment-label">Pick-Up Date</div>
-              <div className="segment-content">
-                <div className="segment-text-wrap">
-                  <div className="segment-main-val">{pickupInfo.date}</div>
-                  <div className="segment-sub-val text-emerald">{pickupInfo.time}</div>
-                </div>
-              </div>
-              <input
-                type="datetime-local"
-                className="hidden-interactive-control"
-                value={pickupDate}
-                onChange={(e) => setPickupDate(e.target.value)}
-                aria-label="Select pickup date and time"
-              />
-            </div>
-
-            <div className="segment-divider"></div>
-
-            {/* Return Date Segment */}
-            <div className="search-segment search-segment-date">
-              <div className="segment-label">Return Date</div>
-              <div className="segment-content">
-                <div className="segment-text-wrap">
-                  <div className="segment-main-val">{returnInfo.date}</div>
-                  <div className="segment-sub-val text-emerald">{returnInfo.time}</div>
-                </div>
-              </div>
-              <input
-                type="datetime-local"
-                className="hidden-interactive-control"
-                value={returnDate}
-                onChange={(e) => setReturnDate(e.target.value)}
-                aria-label="Select return date and time"
-              />
-            </div>
+            {/* Unified Range Picker (Hero Variant) */}
+            <RentalRangePicker
+              variant="hero"
+              pickupDate={pickupDate}
+              returnDate={returnDate}
+              onRangeChange={({ pickupDate: newPickup, returnDate: newReturn }) => {
+                setPickupDate(newPickup);
+                setReturnDate(newReturn);
+              }}
+            />
 
             <div className="segment-divider"></div>
 
