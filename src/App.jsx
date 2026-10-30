@@ -9,6 +9,7 @@ import FleetPage from './pages/FleetPage';
 import VehicleDetailPage from './pages/VehicleDetailPage';
 import SustainabilityPage from './pages/SustainabilityPage';
 import AccountPage from './pages/AccountPage';
+import BookingPage from './pages/BookingPage';
 
 import './App.css';
 
@@ -101,6 +102,22 @@ export default function App() {
             <Route
               path="/sustainability"
               element={<SustainabilityPage />}
+            />
+            <Route
+              path="/booking"
+              element={
+                <BookingPage
+                  selectedHub={selectedHub}
+                  setSelectedHub={setSelectedHub}
+                  pickupDate={pickupDate}
+                  setPickupDate={setPickupDate}
+                  returnDate={returnDate}
+                  setReturnDate={setReturnDate}
+                  activeRentalCar={activeRentalCar}
+                  setActiveRentalCar={setActiveRentalCar}
+                  setIsLocked={setIsLocked}
+                />
+              }
             />
             <Route
               path="/account"
